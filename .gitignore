@@ -1,0 +1,7 @@
+echo "vendor/" >> .gitignore
+echo ".env" >> .gitignore
+echo "node_modules/" >> .gitignore
+echo "composer.lock" >> .gitignore
+echo ".vscode/" >> .gitignore
+echo ".idea/" >> .gitignore
+echo "data/" >> .gitignore
