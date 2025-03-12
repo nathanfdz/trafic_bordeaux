@@ -1,0 +1,87 @@
+/* Définition des couleurs de base */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+/* En-tête */
+h2 {
+    text-align: center;
+    color: #333;
+    margin-top: 20px;
+}
+
+/* Formulaire d'ajout et de modification */
+form {
+    background-color: #fff;
+    max-width: 500px;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+form label {
+    font-weight: bold;
+    margin-top: 10px;
+    display: inline-block;
+}
+
+form input {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+/* Boutons */
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+/* Liste des holidays */
+#holidaysList {
+    list-style-type: none;
+    padding: 0;
+}
+
+#holidaysList li {
+    background-color: #fff;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+#holidaysList li span {
+    font-weight: bold;
+}
+
+#holidaysList li .holiday-info {
+    color: #555;
+    font-size: 14px;
+}
+
+/* Style pour les erreurs */
+.error-message {
+    color: red;
+    font-size: 14px;
+    text-align: center;
+    margin-top: 20px;
+}
