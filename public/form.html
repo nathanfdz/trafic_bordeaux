@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajouter un Holiday</title>
+</head>
+<body>
+    <h2>Ajouter un Holiday</h2>
+    <form action="/holidays/add" method="POST">
+        <label>Nom : <input type="text" name="name" required></label><br>
+        <label>Date : <input type="text" name="date" required></label><br>
+        <label>Description : <textarea name="description" required></textarea></label><br>
+        <button type="submit">Ajouter</button>
+    </form>
+</body>
+</html>

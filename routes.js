@@ -1,5 +1,6 @@
 const express = require('express');
 const { ObjectId } = require('mongodb');
+const path = require('path');
 
 const router = express.Router();
 
@@ -14,27 +15,64 @@ module.exports = (db) => {
     }
   });
 
-  // 📌 Route POST : Ajouter un holiday
-  router.post('/holidays', async (req, res) => {
+  // 📌 Route GET : Afficher le formulaire d'ajout (HTML)
+  router.get('/holidays/edit', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'add-form.html'));
+  });
+
+  // 📌 Route POST : Ajouter un holiday (après soumission du formulaire)
+  router.post('/holidays/add', async (req, res) => {
     try {
-      const newHoliday = req.body;
-      const result = await db.collection('holidays').insertOne(newHoliday);
-      res.json(result);
+      const newHoliday = {
+        name: req.body.name,
+        date: req.body.date,
+        description: req.body.description
+      };
+      await db.collection('holidays').insertOne(newHoliday);
+      res.redirect('/holidays'); // Redirection vers la liste
     } catch (err) {
       res.status(500).json({ error: 'Erreur lors de l\'ajout du holiday' });
     }
   });
 
-  // 📌 Route PUT : Modifier un holiday par son ID
-  router.put('/holidays/edit/:id', async (req, res) => {
+  // 📌 Route GET : Afficher le formulaire de modification
+  router.get('/holidays/edit/:id', async (req, res) => {
     try {
       const { id } = req.params;
-      const updatedHoliday = req.body;
-      const result = await db.collection('holidays').updateOne(
+      const holiday = await db.collection('holidays').findOne({ _id: new ObjectId(id) });
+
+      if (!holiday) {
+        return res.status(404).send('Holiday non trouvé');
+      }
+
+      res.send(`
+        <h2>Modifier un Holiday</h2>
+        <form action="/holidays/edit/${id}" method="POST">
+          <label>Nom : <input type="text" name="name" value="${holiday.name}" required></label><br>
+          <label>Date : <input type="text" name="date" value="${holiday.date}" required></label><br>
+          <label>Description : <textarea name="description" required>${holiday.description}</textarea></label><br>
+          <button type="submit">Modifier</button>
+        </form>
+      `);
+    } catch (err) {
+      res.status(500).json({ error: 'Erreur lors de la récupération du holiday' });
+    }
+  });
+
+  // 📌 Route POST : Modifier un holiday (après soumission du formulaire)
+  router.post('/holidays/edit/:id', async (req, res) => {
+    try {
+      const { id } = req.params;
+      const updatedHoliday = {
+        name: req.body.name,
+        date: req.body.date,
+        description: req.body.description
+      };
+      await db.collection('holidays').updateOne(
         { _id: new ObjectId(id) },
         { $set: updatedHoliday }
       );
-      res.json(result);
+      res.redirect('/holidays'); // Redirection vers la liste
     } catch (err) {
       res.status(500).json({ error: 'Erreur lors de la modification du holiday' });
     }
@@ -44,8 +82,8 @@ module.exports = (db) => {
   router.delete('/holidays/:id', async (req, res) => {
     try {
       const { id } = req.params;
-      const result = await db.collection('holidays').deleteOne({ _id: new ObjectId(id) });
-      res.json(result);
+      await db.collection('holidays').deleteOne({ _id: new ObjectId(id) });
+      res.json({ message: 'Holiday supprimé avec succès' });
     } catch (err) {
       res.status(500).json({ error: 'Erreur lors de la suppression du holiday' });
     }

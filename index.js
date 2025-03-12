@@ -1,10 +1,15 @@
 const express = require('express');
 const { MongoClient } = require('mongodb');
 const cors = require('cors');
+const path = require('path');
 
 const app = express();
-app.use(express.json());  // Permettre l'envoi de JSON
-app.use(cors());  // Éviter les erreurs CORS
+app.use(express.json()); // Permettre l'envoi de JSON
+app.use(cors()); // Éviter les erreurs CORS
+app.use(express.urlencoded({ extended: true })); // Permettre l'envoi de formulaires
+
+// Servir les fichiers statiques (formulaires HTML)
+app.use(express.static(path.join(__dirname, 'public')));
 
 const url = 'mongodb://localhost:27017';
 const dbName = 'projetMongodb';
