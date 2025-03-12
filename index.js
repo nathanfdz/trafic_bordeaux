@@ -1,19 +1,27 @@
+const express = require('express');
 const { MongoClient } = require('mongodb');
+const cors = require('cors');
+
+const app = express();
+app.use(express.json());  // Permettre l'envoi de JSON
+app.use(cors());  // Éviter les erreurs CORS
+
 const url = 'mongodb://localhost:27017';
-const dbName = 'projet_mongodb';  // Ton nom de base de données
+const dbName = 'projetMongodb';
 
-async function connectDB() {
-  const client = new MongoClient(url);
-  try {
-    await client.connect();
-    console.log("Connexion à la base de données MongoDB réussie !");
+MongoClient.connect(url)
+  .then(client => {
     const db = client.db(dbName);
-    // Tu peux ajouter du code pour manipuler les données ici
-  } catch (err) {
-    console.error("Erreur de connexion :", err);
-  } finally {
-    await client.close();
-  }
-}
+    console.log('✅ Connecté à MongoDB');
 
-connectDB();
+    // 🔥 Importer et utiliser les routes
+    const routes = require('./routes')(db);
+    app.use(routes);
+
+    // Démarrer le serveur
+    const PORT = 3000;
+    app.listen(PORT, () => {
+      console.log(`🚀 Serveur lancé sur http://localhost:${PORT}`);
+    });
+  })
+  .catch(err => console.error('❌ Erreur de connexion MongoDB :', err));
