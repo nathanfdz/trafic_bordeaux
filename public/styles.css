@@ -1,7 +1,7 @@
 /* Définition des couleurs de base */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f9;
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f6f9;
     color: #333;
     margin: 0;
     padding: 0;
@@ -10,78 +10,145 @@ body {
 /* En-tête */
 h2 {
     text-align: center;
-    color: #333;
-    margin-top: 20px;
+    color: #2a2a2a;
+    font-size: 28px;
+    margin-top: 30px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
-/* Formulaire d'ajout et de modification */
+/* Formulaire */
 form {
     background-color: #fff;
-    max-width: 500px;
+    max-width: 1000px;
     margin: 20px auto;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
 }
 
 form label {
-    font-weight: bold;
-    margin-top: 10px;
-    display: inline-block;
+    font-weight: 600;
+    margin-top: 15px;
+    font-size: 16px;
+    width: 30%;
 }
 
 form input {
-    width: 100%;
-    padding: 8px;
+    width: 65%;
+    padding: 12px;
     margin-top: 5px;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
     border: 1px solid #ccc;
-    border-radius: 4px;
+    border-radius: 6px;
+    font-size: 16px;
     box-sizing: border-box;
+}
+
+form input:focus {
+    border-color: #3e8e41;
+    outline: none;
+    box-shadow: 0 0 8px rgba(62, 142, 65, 0.2);
 }
 
 /* Boutons */
 button {
-    background-color: #4CAF50;
+    background-color: #3e8e41;
     color: white;
-    padding: 10px 15px;
+    padding: 12px 20px;
     border: none;
-    border-radius: 4px;
+    border-radius: 6px;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 18px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    width: 100%;
+    margin-top: 20px;
 }
 
 button:hover {
-    background-color: #45a049;
+    background-color: #368639;
+    transform: scale(1.05);
 }
 
-/* Liste des holidays */
-#holidaysList {
-    list-style-type: none;
-    padding: 0;
+/* Boutons Modifier et Supprimer */
+button.small {
+    background-color: #f39c12;
+    color: white;
+    padding: 6px 12px;
+    font-size: 14px;
+    border-radius: 4px;
+    width: auto;
+    margin: 5px;
 }
 
-#holidaysList li {
+button.small:hover {
+    background-color: #e67e22;
+}
+
+button.delete {
+    background-color: #e74c3c;
+    color: white;
+    padding: 6px 12px;
+    font-size: 14px;
+    border-radius: 4px;
+    width: auto;
+    margin: 5px;
+}
+
+button.delete:hover {
+    background-color: #c0392b;
+}
+
+/* Tableau */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 40px;
     background-color: #fff;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+th, td {
     padding: 15px;
-    margin: 10px 0;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    font-size: 16px;
+    border-bottom: 1px solid #ddd;
 }
 
-#holidaysList li span {
-    font-weight: bold;
+th {
+    background-color: #3e8e41;
+    color: white;
 }
 
-#holidaysList li .holiday-info {
-    color: #555;
-    font-size: 14px;
+td {
+    background-color: #f9f9f9;
 }
 
-/* Style pour les erreurs */
-.error-message {
-    color: red;
-    font-size: 14px;
-    text-align: center;
-    margin-top: 20px;
+tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    form {
+        padding: 20px;
+        max-width: 100%;
+    }
+
+    form label, form input {
+        width: 100%;
+    }
+
+    h2 {
+        font-size: 24px;
+    }
+
+    table th, table td {
+        font-size: 14px;
+        padding: 10px;
+    }
 }
