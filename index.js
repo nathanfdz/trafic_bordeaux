@@ -20,7 +20,7 @@ MongoClient.connect(url)
     const db = client.db(dbName);
     console.log('Connecté à MongoDB');
 
-    // 🔥 Importer et utiliser les routes
+    // Importer et utiliser les routes
     const routes = require('./routes')(db);
     app.use('/api', routes); // Ajout d'un préfixe API pour plus de clarté
 

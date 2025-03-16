@@ -40,7 +40,7 @@ module.exports = (db) => {
     }
   });
 
-  // Récupérer des statistiques (somme et moyenne TMJO TV)
+  // Récupérer des statistiques 
   router.get('/donnee_trafic/aggregations', async (req, res) => {
     try {
       const stats = await db.collection('donnee_trafic').aggregate([
